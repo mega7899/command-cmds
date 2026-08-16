@@ -29,17 +29,22 @@ def keep_alive():
     t.start()
 # ---------------------------------------------
 
-# WARNING: CHANGE THIS TOKEN IN THE NEXT STEP!
+# Fetch credentials from environment variables safely
 TOKEN = os.environ.get('DISCORD_TOKEN')
+ATERNOS_USER = os.environ.get('ATERNOS_USER', 'your_username_here')
+ATERNOS_PASS = os.environ.get('ATERNOS_PASS', 'your_password_here')
 
-# 1. Initialize the client and log in
+# Initialize Discord Client
+client = discord.Client()
+
+# 1. Initialize the Aternos client and log in
 atclient = Client()
-atclient.login('your_username_here', 'your_password_here') # Put your real credentials here
+atclient.login(ATERNOS_USER, ATERNOS_PASS)
 
 # 2. Get the account object
 aternos_account = atclient.account
 
-# 3. Fetch the servers list (Note the method name change!)
+# 3. Fetch the servers list
 servers = aternos_account.list_servers()
 
 # 4. Get your specific server (assuming you only have 1)

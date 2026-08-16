@@ -4,9 +4,9 @@ FROM python:3.10-slim
 # 2. Set the working directory inside the container
 WORKDIR /app
 
-# 3. Install system dependencies required for packages like lxml
+# 3. Install build tools and system dependencies required for compilation
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
+    build-essential \
     libxml2-dev \
     libxslt-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 4. Copy the requirements file first to leverage Docker's caching
 COPY requirements.txt .
 
-# 5. Install the required Python packages
+# 5. Upgrade pip and install the required Python packages
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 6. Copy the rest of your bot files into the container

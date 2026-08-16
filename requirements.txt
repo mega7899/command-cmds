@@ -1,3 +1,4 @@
 discord.py==1.7.3
 mcstatus==9.0.2
 python-aternos==0.5
+lxml>=4.9.3

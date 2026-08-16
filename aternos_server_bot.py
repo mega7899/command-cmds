@@ -32,10 +32,18 @@ def keep_alive():
 # WARNING: CHANGE THIS TOKEN IN THE NEXT STEP!
 TOKEN = os.environ.get('DISCORD_TOKEN')
 
-client = discord.Client()
-aternos = Client('meta789', password='dantdm789')
-atservers = aternos.servers
-myserv = atservers[0]
+# 1. Initialize the client and log in
+atclient = Client()
+atclient.login('your_username_here', 'your_password_here') # Put your real credentials here
+
+# 2. Get the account object
+aternos_account = atclient.account
+
+# 3. Fetch the servers list (Note the method name change!)
+servers = aternos_account.list_servers()
+
+# 4. Get your specific server (assuming you only have 1)
+myserv = servers[0]
 
 @client.event
 async def on_ready():
